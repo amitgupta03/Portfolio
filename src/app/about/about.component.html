@@ -1,0 +1,31 @@
+<div class="main" id="about">
+  <div class="heading">
+    <h3 class="p-2 text-border">About Me</h3>
+  </div>
+  <div class="sub-main">
+    <div class="card left-border">
+      <div class="card-body">
+        <p class="card-text p-3">My name is Amit Gupta. I'm a Front End Engineer based in Noida. I describe
+          myself as a
+          an independent, passionate and self-motivated developer with almost 3 years of experience.
+          Involved in
+          development, testing, management and rollout channels of the new products.</p>
+      </div>
+    </div>
+  </div>
+  <div class="chart-class">
+    <ngx-charts-bar-horizontal
+      [scheme]="colorScheme"
+      [results]="single"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+     >
+    </ngx-charts-bar-horizontal>
+  </div>
+</div>

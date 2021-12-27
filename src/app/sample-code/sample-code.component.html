@@ -1,0 +1,194 @@
+<form [formGroup]="checkoutForm">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Identity Type</th>
+                <th scope="col">Identity NO</th>
+                <th scope="col">Valid Upto</th>
+                <th scope="col">Attachment</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">
+                    <select class="form-select" formControlName="identityType" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        <option>One</option>
+                        <option>Two</option>
+                        <option>Three</option>
+                    </select>
+                </th>
+                <td>
+                    <div class="input-group mb-3">
+                        <input type="number" formControlName="identityNO" class="form-control" required
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                    </div>
+                </td>
+                <td>
+                    <input type="date" formControlName="validUpto" max="9999-12-31" class="form-control"
+                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                </td>
+                <td>
+                    <div class="mb-3">
+                        <input formControlName="attachment" accept="application/pdf,image/png,image/jpeg,image/png"
+                            (change)="onFileChanged($event)" class="form-control" type="file" id="formFile" />
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-secondary" [disabled]="checkoutForm.invalid" (click)="onAdd()">
+                        Add
+                    </button>
+                </td>
+            </tr>
+            <div></div>
+            <tr *ngFor="let data of show; let i = index">
+                <td>
+                    <span *ngIf="data.editflag">
+                        <select class="form-select" [(ngModel)]="data.identityType"
+                            [ngModelOptions]="{ standalone: true }" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option>One</option>
+                            <option>Two</option>
+                            <option>Three</option>
+                        </select>
+                    </span>
+                    <span *ngIf="!data.editflag">{{ data.identityType }}</span>
+                </td>
+                <td>
+                    <span *ngIf="data.editflag">
+                        <input type="text" [ngModelOptions]="{ standalone: true }" [(ngModel)]="data.identityNO"
+                            class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" />
+                    </span>
+                    <span *ngIf="!data.editflag">
+                        {{ data.identityNO }}
+                    </span>
+                </td>
+                <td>
+                    <span *ngIf="!data.editflag">
+                        {{ data.validUpto }}
+                    </span>
+                    <span *ngIf="data.editflag">
+                        <input type="date" [ngModelOptions]="{ standalone: true }" [(ngModel)]="data.validUpto"
+                            class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" />
+                    </span>
+                </td>
+                <td>
+                    <span data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                        *ngIf="!data.editflag && data.attachment" (click)="openModel(data.attachment, data.filetype)">
+                        <div *ngIf="data.filetype == 'application/pdf'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                class="bi bi-file-pdf" viewBox="0 0 16 16">
+                                <path
+                                    d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+                                <path
+                                    d="M4.603 12.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.701 19.701 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.187-.012.395-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.065.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.716 5.716 0 0 1-.911-.95 11.642 11.642 0 0 0-1.997.406 11.311 11.311 0 0 1-1.021 1.51c-.29.35-.608.655-.926.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.27.27 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.647 12.647 0 0 1 1.01-.193 11.666 11.666 0 0 1-.51-.858 20.741 20.741 0 0 1-.5 1.05zm2.446.45c.15.162.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.881 3.881 0 0 0-.612-.053zM8.078 5.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z" />
+                            </svg>
+                        </div>
+                        <div *ngIf="
+                    data.filetype == 'image/png' ||
+                    (data.filetype == 'image/jpeg' && data.attachment)
+                  ">
+                            <img src="{{ data.attachment }}" alt="..." class="img-thumbnail" />
+                        </div>
+                    </span>
+                    <span *ngIf="data.editflag">
+                        <div class="mb-3">
+                            <input accept="application/pdf,image/png,image/jpeg,image/png"
+                                (change)="onFileChanged($event)" class="form-control" type="file" id="formFile" />
+                        </div>
+                    </span>
+                </td>
+                <td>
+                    <span *ngIf="!data.editflag" class="margin-right" (click)="onEdit(data, i)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil" viewBox="0 0 16 16">
+                            <path
+                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                        </svg>
+                    </span>
+
+                    <button class="margin-right" *ngIf="data.editflag" type="button" class="btn btn-primary"
+                        (click)="saveEdit(data, i)">
+                        save
+                    </button>
+
+                    <span class="margin-right" (click)="download(data)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-download" viewBox="0 0 16 16">
+                            <path
+                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                            <path
+                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg>
+                    </span>
+                    <span class="margin-right" (click)="delete(data,i)">
+                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16" height="16"
+                            viewBox="0 0 488.936 488.936" style="enable-background: new 0 0 488.936 488.936"
+                            xml:space="preserve">
+                            <g>
+                                <g>
+                                    <path
+                                        d="M381.16,111.948H107.376c-6.468,0-12.667,2.819-17.171,7.457c-4.504,4.649-6.934,11.014-6.738,17.477l9.323,307.69
+                                            c0.39,12.92,10.972,23.312,23.903,23.312h20.136v-21.012c0-24.121,19.368-44.049,43.488-44.049h127.896
+                                            c24.131,0,43.893,19.928,43.893,44.049v21.012h19.73c12.933,0,23.52-10.346,23.913-23.268l9.314-307.7
+                                            c0.195-6.462-2.234-12.863-6.738-17.513C393.821,114.767,387.634,111.948,381.16,111.948z" />
+                                    <path
+                                        d="M309.166,435.355H181.271c-6.163,0-11.915,4.383-11.915,11.516v30.969c0,6.672,5.342,11.096,11.915,11.096h127.895
+                                            c6.323,0,11.366-4.773,11.366-11.096v-30.969C320.532,440.561,315.489,435.355,309.166,435.355z" />
+                                    <path
+                                        d="M427.696,27.106C427.696,12.138,415.563,0,400.591,0H88.344C73.372,0,61.239,12.138,61.239,27.106v30.946
+                                            c0,14.973,12.133,27.106,27.105,27.106H400.59c14.973,0,27.105-12.133,27.105-27.106L427.696,27.106L427.696,27.106z" />
+                                </g>
+                            </g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                            <g></g>
+                        </svg>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="previewImage">
+                    <img src="{{ previewImage }}" />
+                </div>
+                <div *ngIf="previewPDF">
+                    <iframe [src]="getSafeUrl()"></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

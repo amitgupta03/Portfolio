@@ -1,0 +1,89 @@
+<div class="main" id="career">
+    <div class="heading">
+        <h3 class="p-2 text-border">Work Experience</h3>
+    </div>
+    <div class="sub-main">
+        <div class="career-highlight">
+            <img src="/assets/pictures/globallogic.jpg" alt="GlobalLogic India Pvt. Ltd.">
+            <div class="text">
+                <div class="stepper d-flex flex-column">
+                    <div class="margin-left">
+                        <h5 class="font-weight">GlobalLogic India Private LTD.</h5>
+                        <p>Noida, Uttar Pradesh, India </p>
+                    </div>
+                    <div class="d-flex mb-1 margin-left">
+                        <div class="d-flex flex-column pr-4 align-items-center">
+                            <div class="rounded-circle py-2 px-2 mb-1 color-or"></div>
+                            <div class="line h-100"></div>
+                        </div>
+                        <div class="margin-left">
+                            <h6 class="font-weight">Software Engineer</h6>
+                            <p>Full-time</p>
+                            <p>May 2021 - Present</p>
+                            <a class="text-decoration-none cursor-pointer" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                                (click)="open('globallogic')">Projects</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="career-highlight">
+            <img src="/assets/pictures/digispice.jpg" alt="DiGiSPICE Technologies Ltd.">
+            <div class="text">
+                <div class="stepper d-flex flex-column">
+                    <div class="margin-left">
+                        <h5 class="font-weight">DiGiSPICE Technologies Ltd.</h5>
+                        <p>Noida, Uttar Pradesh, India </p>
+                    </div>
+                    <div class="d-flex mb-1 margin-left">
+                        <div class="d-flex flex-column pr-4 align-items-center">
+                            <div class="rounded-circle py-2 px-2 mb-1 color-or"></div>
+                            <div class="line h-100"></div>
+                        </div>
+                        <div class="margin-left">
+                            <h6 class="font-weight">Software Engineer</h6>
+                            <p>Full-time</p>
+                            <p>Mar 2019 – Apr 2021</p>
+                            <a class="text-decoration-none cursor-pointer" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                                (click)="open('digispice')">Projects</a>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-1 margin-left">
+                        <div class="d-flex flex-column pr-4 align-items-center">
+                            <div class="rounded-circle py-2 px-2 mb-1 color-or"></div>
+                        </div>
+                        <div class="margin-left">
+                            <h6 class="font-weight">Trainee</h6>
+                            <p>Full-time</p>
+                            <p>2018 – Feb 2019</p>
+                            <a class="text-decoration-none cursor-pointer" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                                (click)="open('digispice_trainee')">Projects</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end bg-color" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel shadow">{{"Project Highlights"}}</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul *ngFor="let data of flyoutData">
+            <div class="header">
+                <h5 id="offcanvasRightLabel">{{data?.header}}</h5>
+            </div>
+            <li class="padding">{{data.pr_line_1}}</li>
+            <li class="padding">{{data.pr_line_2}}</li>
+            <li class="padding">{{data.pr_line_3}}</li>
+            <li class="padding">{{data.pr_line_4}}</li>
+        </ul>
+    </div>
+</div>

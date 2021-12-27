@@ -1,0 +1,36 @@
+.img-thumbnail {
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    max-width: 100%;
+    height: auto;
+    width: 58px;
+    cursor: pointer;
+  }
+
+  .cursor-pointer{
+    cursor: pointer;
+  }
+
+  body .modal-dialog { /* Width */
+    max-width: 100%;
+    width: auto !important;
+    display: inline-block;
+}
+
+.margin-right {
+  margin-right:15px;
+  cursor: pointer;
+}
+
+.active-download {
+  background: #e2ecd3;
+  border: 2px solid green;
+}
+
+iframe {
+  height: 30rem;
+  width: 100%;
+}
+  
